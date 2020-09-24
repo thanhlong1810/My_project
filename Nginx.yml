@@ -1,0 +1,16 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: yes
+
+  pre_tasks: 
+    - name: Turn off Firewalld
+      shell: 
+        sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
+        sed -i 's/SELINUX=enforcing/SELINUX=disabled/g'  /etc/selinux/config
+        systemctl disable firewalld
+        systemctl stop firewalld
+        yum update -y
+  tasks:
+    - ping:
+
