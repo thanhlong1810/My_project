@@ -1,0 +1,6 @@
+---
+  - hosts: centos7
+    gather_facts: yes
+    become: yes
+    pre_tasks:
+      ping:
