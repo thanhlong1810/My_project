@@ -17,10 +17,6 @@
         service: http
         permanent: yes
         state: enabled
-   - name: reload service firewalld
-     systemd:
-        name: firewalld
-        state: reload
    - name: Start service httpd, if not started
      service:
        name: httpd
