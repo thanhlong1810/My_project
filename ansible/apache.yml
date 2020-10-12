@@ -21,7 +21,7 @@
      systemd:
         name: firewalld
         state: reload
-   - name: Make sure a service is running
-     service: name=httpd enable=yes state=started
+   - name: Make sure Apache is stated now and boot.
+     service: name=httpd state=started enable=yes
 
       
