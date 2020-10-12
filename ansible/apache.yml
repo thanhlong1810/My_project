@@ -24,6 +24,7 @@
    - name: Make sure a service is running
      systemd:
         state: started
+        enable: yes
         name: httpd
 
       
