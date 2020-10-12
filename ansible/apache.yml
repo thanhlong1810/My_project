@@ -1,17 +1,12 @@
 ---
-- hosts: all
+- hosts: centos7
   gather_facts: yes
   become: yes
-
-  pre_tasks:
-   name: Update package
-   yum:
-    name: update
 
   tasks:
    - name: Install Apache
      yum:
-        name: httpd
+      name: httpd
    - name: permit traffic in default zone for https service
      firewalld:
         service: https
