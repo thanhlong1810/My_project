@@ -9,30 +9,26 @@
     name: update
 
   tasks:
-  - name: Install Apache
-    yum:
-      name: httpd
-
-  - name: permit traffic in default zone for https service
-    firewalld:
-      service: https
-      permanent: yes
-      state: enabled
-
-  - name: permit traffic in default zone for http service
-    firewalld:
-      service: http
-      permanent: yes
-      state: enabled
-
-  - name: reload service firewalld
-    systemd:
-      name: firewalld
-      state: reload
-
-  - name: Make sure a service is running
-    systemd:
-      state: started
-      name: httpd
+   - name: Install Apache
+     yum:
+        name: httpd
+   - name: permit traffic in default zone for https service
+     firewalld:
+        service: https
+        permanent: yes
+        state: enabled
+   - name: permit traffic in default zone for http service
+     firewalld:
+        service: http
+        permanent: yes
+        state: enabled
+   - name: reload service firewalld
+     systemd:
+        name: firewalld
+        state: reload
+   - name: Make sure a service is running
+     systemd:
+        state: started
+        name: httpd
 
       
