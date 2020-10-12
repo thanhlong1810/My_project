@@ -1,10 +1,10 @@
 ---
-- hosts: centos7
+- hosts: all
   gather_facts: yes
   become: yes
 
   pre_tasks:
-   name: Update
+   name: Update package
    yum:
     name: update
 
