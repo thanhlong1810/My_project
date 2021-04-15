@@ -1,0 +1,49 @@
+---
+
+- hosts: all
+  gather_facts: yes
+  become: yes
+  tasks:
+    - name: "update all packages"
+      yum:
+        name: "*"
+        state: latest
+
+    - name: "Basic LAMP server"
+      yum:
+        name:
+          - httpd
+          - mariadb
+          - mariadb-server
+          - epel-release
+          - php-gd
+          - php-imap
+          - php-xml
+          - php-mbstring
+          - php-intl
+          - php-pecl-apcu
+          - yum-utils
+        state: present
+
+    - firewalld:
+        zone: public
+        port: 443/tcp
+        permanent: yes
+        state: enabled
+
+    - firewalld:
+        zone: public
+        port: 80/tcp
+        permanent: yes
+        state: enabled
+
+    - name: Reload firewalld
+      systemd:
+        state: reloaded
+        name: firewalld
+           
+    - name: "Start service httpd, mariadb if not started"
+      service: "name={{ item }} state=started enabled=yes "
+      with_items:
+        - httpd
+        - mariadb
